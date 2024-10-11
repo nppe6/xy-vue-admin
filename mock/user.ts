@@ -8,8 +8,12 @@ export default [
     response: () => {
       return {
         code: 200,
+        message:'请求成功',
+        types: 'success',
         data: {
           name: '萧先生',
+          age: 19,
+          avatar: 'image/avatar.jpg'
         },
       }
     },
