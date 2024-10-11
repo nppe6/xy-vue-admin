@@ -1,7 +1,7 @@
-import { ConfigEnv, defineConfig, loadEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { ConfigEnv, loadEnv } from 'vite'
 import alias from './vite/alias'
 import { parseEnv } from './vite/utils'
+import { setupPlugins } from './vite/plugins'
 
 // https://vitejs.dev/config/
 // export default defineConfig({
@@ -19,7 +19,7 @@ export default ({ command, mode }: ConfigEnv) => {
   
 
   return {
-    plugins: [vue()],
+    plugins: setupPlugins(isBuild,env),
     resolve: {
       alias
     }
