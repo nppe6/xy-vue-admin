@@ -1,3 +1,4 @@
+import helper from '@/utils/helper'
 import { RouteRecordRaw } from 'vue-router'
 
 // 获取文件路径
@@ -52,4 +53,5 @@ function getRouterModel(file: string, module: any) {
   return Object.assign(route,module?.route)
 }
 
-export default getRouter()
+const router = helper.env.VITE_ROUTER_AUTOLOAD ? getRouter() : [] as RouteRecordRaw[]
+export default router
