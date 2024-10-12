@@ -1,11 +1,15 @@
 <template>
-  <button class=" p-2 bg-blue-700 text-white rounded-md">登录</button>
+  <button>
+    <slot></slot>
+  </button>
 </template>
 
 <script setup lang="ts">
 
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+button{
+  @apply py-2 bg-violet-700 w-full text-white rounded-md hover:bg-violet-500 duration-300
+}
 </style>
