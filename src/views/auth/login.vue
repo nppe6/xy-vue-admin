@@ -1,37 +1,72 @@
 <template>
   <div class="login-content">
-    <div class="form">
+    <Form class="form" @submit="onSubmit" :validation-schema="Schema">
       <h1>通用后台脚手架</h1>
       <div class="form-content">
-        <xy-input class=" input-item" placeholder="请输入手机号或邮箱账号" type="text"></xy-input>
-        <xy-input class=" input-item" placeholder="请输入密码" type="password"></xy-input>
-        <xy-button>登录</xy-button>
+        <Field
+          name="username"
+          label="用户名或邮箱"
+          placeholder="请输入用户名或邮箱"
+          :rules="{ required: true, email: true }"
+          class="xy-input"
+          >
+        </Field>
+
+
+        <!-- as div就是将这个组件识别成一个 div 默认是 span -->
+        <ErrorMessage name="username" as="div" class="xy-error-text"></ErrorMessage>
+
+        <Field
+          name="password"
+          label="密码"
+            placeholder="请输入密码"
+          :rules="{ required: true, min: 6 }"
+          class="xy-input mt-3">
+        </Field>
+        <!-- as div就是将这个组件识别成一个 div 默认是 span -->
+        <ErrorMessage name="password" as="div" class="xy-error-text"></ErrorMessage>
+        <xy-button class="mt-5">登录</xy-button>
+
+        <div class="flex justify-end mt-3">
+          <p class=" text-white text-sm px-2 cursor-pointer">忘记密码</p>
+        </div>
+        <!-- <div class=" flex justify-center mt-4">
+          <i class="fa-brands fa-weixin bg-green-600 text-white rounded-full p-2 cursor-pointer "></i>
+        </div> -->
       </div>
-    </div>
+    </Form>
   </div>
 </template>
 
 <script setup lang="ts">
+import veeValidate from '@/plugins/validate'
+const { Form, Field, ErrorMessage } = veeValidate
+
+const Schema = veeValidate.yup.object({
+  username: veeValidate.yup.string().required().email().label('邮箱'),
+  password: veeValidate.yup.string().required().min(6).label('密码')
+})
+
+const onSubmit = (values)=>{
+  console.log(values);
+  alert('333')
+}
 
 </script>
 
 <style lang="scss" scoped>
-.login-content{
+.login-content {
   @apply h-screen bg-[#2d3a4b] flex justify-center items-center p-5 md:p-0;
 
-  .form{
+  .form {
     @apply w-[420px] -translate-y-32;
 
-    h1{
-      @apply text-white text-2xl text-center font-semibold mb-8
+    h1 {
+      @apply text-white text-2xl text-center font-semibold mb-8;
     }
 
-    .form-content{
-      @apply w-full flex flex-col gap-4;
-
-      .input-item{
-        @apply bg-transparent text-white bg-[#283443];
-      }
+    .form-content {
+      @apply w-full flex flex-col;
     }
   }
 }
