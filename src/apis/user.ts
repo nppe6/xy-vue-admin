@@ -11,3 +11,15 @@ export function axiosGetUser(){
     url: '/user'
   })
 }
+
+interface LoginInterface{
+  token: string
+}
+
+export function axiosLogin(data:any){
+  return http.request<LoginInterface>({
+    url:'/login',
+    method:'POST',
+    data
+  })
+}
