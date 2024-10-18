@@ -51,7 +51,9 @@
 import { axiosLogin } from '@/apis/user'
 import veeValidate from '@/plugins/validate'
 import { store } from '@/utils';
+import {  useRouter } from 'vue-router';
 const { Form, Field, ErrorMessage } = veeValidate
+const router = useRouter()
 
 const Schema = veeValidate.yup.object({
   username: veeValidate.yup.string().required().email().label('邮箱'),
@@ -63,12 +65,18 @@ const onSubmit = async (values:any) => {
   const { data:{token} } = await axiosLogin(values)
 
   store.set('token',{
-    expire:100,
+    expire:1000,
     token
   })
  
-
+  router.push({name:'home'})
   alert('333')
+}
+</script>
+
+<script lang="ts">
+export default {
+  route:{ name: 'login'}
 }
 </script>
 

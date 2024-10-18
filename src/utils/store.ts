@@ -1,4 +1,4 @@
-interface IData {
+export interface IData {
   expire: number,
   [key: string]: any
 }
@@ -16,7 +16,7 @@ export default {
     if(item){
       const data = JSON.parse(item)
       const expire = data?.expire
-      if(expire < new Date().getTime()){
+      if(expire && expire < new Date().getTime()){
         localStorage.removeItem(key)
         return null
       }

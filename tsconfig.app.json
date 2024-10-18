@@ -31,5 +31,5 @@
     "src/**/*.vue",
     "vite.config.ts",
     "types/**/*.d.ts"
-  ]
+, "types/router.ts"  ]
 }
