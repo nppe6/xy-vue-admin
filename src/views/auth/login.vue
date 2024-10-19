@@ -76,7 +76,7 @@ const onSubmit = async (values:any) => {
 
 <script lang="ts">
 export default {
-  route:{ name: 'login'}
+  route:{ name: 'login',meta: {guest: true}} // 设置 guest 表示游客登录以后不允许访问登录页
 }
 </script>
 
