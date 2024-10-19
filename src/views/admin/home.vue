@@ -1,6 +1,6 @@
 <template>
-  <div class=" bg-red-300 h-10 w-screen">
-    <h2 class=" text-blue-500 size-4 font-medium">user.vue</h2>
+  <div>
+    <h2>home.vue</h2>
   </div>
 </template>
 

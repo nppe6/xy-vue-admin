@@ -70,7 +70,6 @@ const onSubmit = async (values:any) => {
   })
  
   router.push({name:'home'})
-  alert('333')
 }
 </script>
 
