@@ -17,23 +17,27 @@
             <span>{{ menu.title }}</span>
           </section>
           <section>
-            <i class="fas fa-angle-down text-md"></i>
+            <i class="fas fa-angle-down text-sm duration-300" :class="{'rotate-180': menu.active}"></i>
           </section>
         </dt>
-        <dd
-          v-show="menu.active"
-          :class="{ active: child.active }"
-          v-for="(child, index) of menu.children"
-          :key="index">
-          {{ child.title }}
-        </dd>
+        <transition name="fade">
+          <div v-show="menu.active">
+            <dd
+              v-for="(child, index) in menu.children"
+              :key="index"
+              :class="{ active: child.active }"
+              class="duration-300 transform transition-opacity">
+              {{ child.title }}
+            </dd>
+          </div>
+        </transition>
       </dl>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 interface IMenuItem {
   title: string
@@ -75,16 +79,23 @@ const menus = reactive<IMenu[]>([
   }
 ])
 
-const resetMenus = ()=>{
-  menus.forEach(pmenu => {
+const resetMenus = () => {
+  menus.forEach((pmenu) => {
+    console.log(pmenu);
+    
     pmenu.active = false
-    pmenu.children?.forEach(cmenu => cmenu.active = false)
+    pmenu.children?.forEach((cmenu) => (cmenu.active = false))
   })
 }
 
-const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem)=>{
-  resetMenus()
-  pmenu.active = true
+const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem) => {
+  if(pmenu.active){
+    pmenu.active = false
+  }else{
+    resetMenus()
+    pmenu.active = true
+  }
+
 }
 </script>
 
@@ -104,17 +115,34 @@ const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem)=>{
   }
 
   .left-container {
+    /* 进入动画 */
+    .fade-enter-active {
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .fade-enter-from {
+      opacity: 0;
+      transform: scaleY(0.95);
+    }
+
+    /* 离开动画直接消失 */
+    .fade-leave-active {
+      transition: none;
+      opacity: 0;
+      transform: scaleY(1);
+    }
+
     @apply px-4 cursor-pointer;
 
     dl {
       @apply text-gray-300 text-sm;
 
       dt {
-        @apply text-lg mt-6 flex justify-between items-center;
+        @apply text-sm mt-6 flex justify-between items-center;
       }
 
       dd {
-        @apply py-2 pl-4 my-2 text-white rounded-md hover:bg-sky-600 duration-300;
+        @apply py-2 pl-4 my-2 text-sm text-gray-300 rounded-md hover:bg-sky-600 duration-300;
 
         &.active {
           @apply bg-sky-700;
