@@ -82,7 +82,7 @@ const resetMenus = ()=>{
   })
 }
 
-const handleClick = (pmenu: IMenuItem, cmenu: IMenuItem)=>{
+const handleClick = (pmenu: IMenuItem, cmenu?: IMenuItem)=>{
   resetMenus()
   pmenu.active = true
 }
