@@ -1,5 +1,5 @@
 <template>
-  <div class=" grid grid-flow-col gap-3 cursor-pointer bg-gray-100">
+  <div class=" grid md:grid-flow-col gap-3 cursor-pointer bg-gray-100">
     <el-card shadow="hover" :body-style="{ padding: '20px' }" v-for="(ele,index) in cards" :key="index">
     <template #header>
     <div class="flex justify-between items-center">
@@ -19,8 +19,8 @@
   </el-card>
   </div>
 
-  <div class="bg-white mt-5">
-    <section class="p-3">
+  <div class="mt-5">
+    <section>
       <Echarts></Echarts>
     </section>
   </div>

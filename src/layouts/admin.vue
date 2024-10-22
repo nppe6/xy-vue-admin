@@ -1,9 +1,9 @@
 <template>
-<div class="admin h-min-screen w-screen flex">
-  <menu-components/>
+<div class="admin min-h-screen w-screen flex">
+  <menu-components class=" hidden md:block"/>
   <div class="content flex-1 bg-gray-100">
     <navbar-components />
-    <history-link/>
+    <history-link class=" hidden md:block"/>
     <div class="m-5  ">
       <router-view></router-view>
     </div>
